@@ -7,8 +7,16 @@ import '@/style/main.css'
 import AppHeader from '@/components/layouts/AppHeader.vue'
 import AppFooter from '@/components/layouts/AppFooter.vue'
 
+import {router} from '@/router.ts'
+
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 const app = createApp(App)
 
 app.component('AppHeader', AppHeader)
 app.component('AppFooter', AppFooter)
+
+app.use(router)
+app.use(ElementPlus)
 app.mount('#app')
