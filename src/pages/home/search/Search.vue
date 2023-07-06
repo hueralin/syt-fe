@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import {Search} from '@element-plus/icons-vue'
+import { Search } from '@element-plus/icons-vue'
 </script>
 
 <style lang="scss" scoped>
