@@ -31,18 +31,9 @@ module.exports = {
 		'vue'
 	],
 	'rules': {
-		'indent': [
-			'error',
-			'tab'
-		],
-		'quotes': [
-			'error',
-			'single'
-		],
-		'semi': [
-			'error',
-			'never'
-		],
+		'indent': ['error', 'tab'],
+		'quotes': ['error', 'single'],
+		'semi': ['error', 'never'],
 		// 单行注释前后加空格
 		'spaced-comment': ['error', 'always'],
 		// 成行的代码块，前后要加空格
@@ -62,6 +53,8 @@ module.exports = {
 		// 箭头函数的空格
 		'arrow-spacing': ['error', { 'before': true, 'after': true }],
 		// 关闭 vue 组件的多单词命名规则
-		'vue/multi-word-component-names': 'off'
+		'vue/multi-word-component-names': 'off',
+		// 必要时可以使用 @ts-xxx 指令关闭严格的校验
+		'@typescript-eslint/ban-ts-comment': 'off'
 	}
 }
