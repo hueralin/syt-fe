@@ -35,10 +35,6 @@ module.exports = {
 			'error',
 			'tab'
 		],
-		'linebreak-style': [
-			'error',
-			'unix'
-		],
 		'quotes': [
 			'error',
 			'single'
@@ -60,10 +56,12 @@ module.exports = {
 		// 块前空格
 		'space-before-blocks': 'error',
 		// 大括号前后空格
-		'object-curly-spacing': ['error', 'always', {'arraysInObjects': true}],
+		'object-curly-spacing': ['error', 'always', { 'arraysInObjects': true }],
 		// 从一个包的导入不允许书写多次，需手动修复
 		'no-duplicate-imports': 'error',
 		// 箭头函数的空格
-		'arrow-spacing': ['error', {'before': true, 'after': true}]
+		'arrow-spacing': ['error', { 'before': true, 'after': true }],
+		// 关闭 vue 组件的多单词命名规则
+		'vue/multi-word-component-names': 'off'
 	}
 }
