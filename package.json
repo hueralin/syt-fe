@@ -7,8 +7,7 @@
     "dev": "vite --open",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
@@ -19,6 +18,8 @@
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@types/node": "^20.3.3",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
