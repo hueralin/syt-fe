@@ -7,7 +7,7 @@ module.exports = {
   'extends': [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:vue/vue3-essential'
+    'plugin:vue/vue3-recommended'
   ],
   'overrides': [
     {
@@ -53,8 +53,19 @@ module.exports = {
     'no-duplicate-imports': 'error',
     // 箭头函数的空格
     'arrow-spacing': ['error', { 'before': true, 'after': true }],
+    // 不允许出现未被使用的变量
+    '@typescript-eslint/no-unused-vars': 'error',
     // 关闭 vue 组件的多单词命名规则
     'vue/multi-word-component-names': 'off',
+    // vue 组件最大属性数量，超出则换行
+    'vue/max-attributes-per-line': ['error', {
+      'singleline': {
+        'max': 3
+      },
+      'multiline': {
+        'max': 1
+      }
+    }],
     // 必要时可以使用 @ts-xxx 指令关闭严格的校验
     '@typescript-eslint/ban-ts-comment': 'off'
   }
