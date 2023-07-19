@@ -1,44 +1,93 @@
 <template>
   <div class="hospital-filter">
-    <div class="mb-5">医院</div>
+    <div class="mb-5">
+      医院
+    </div>
     <div class="flex mb-5">
-      <div class="basis-12 shrink-0">等级：</div>
+      <div class="basis-12 shrink-0">
+        等级：
+      </div>
       <ul>
-        <li>全部</li>
-        <li>三级甲等</li>
-        <li>三级乙等</li>
-        <li>二级甲等</li>
-        <li>二级乙等</li>
-        <li>一级</li>
+        <li :class="{ 'text-[#55a6fe]': localLevel === '' }" @click="changeLevel('')">
+          全部
+        </li>
+        <li
+          v-for="l in levels"
+          :key="l.id"
+          :class="{ 'text-[#55a6fe]': localLevel === l.value }"
+          @click="changeLevel(l.value)"
+        >
+          {{ l.name }}
+        </li>
       </ul>
     </div>
     <div class="flex mb-5">
-      <div class="basis-12 shrink-0">地域：</div>
+      <div class="basis-12 shrink-0">
+        地域：
+      </div>
       <ul>
-        <li>全部</li>
-        <li>东城区</li>
-        <li>西城区</li>
-        <li>朝阳区</li>
-        <li>丰台区</li>
-        <li>石景山区</li>
-        <li>海淀区</li>
-        <li>门头沟区</li>
-        <li>房山区</li>
-        <li>大兴区</li>
-        <li>通州区</li>
-        <li>顺义区</li>
-        <li>昌平区</li>
-        <li>怀柔区</li>
-        <li>平谷区</li>
-        <li>密云区</li>
-        <li>延庆区</li>
+        <li :class="{ 'text-[#55a6fe]': localRegion === '' }" @click="changeRegion('')">
+          全部
+        </li>
+        <li
+          v-for="r in regions"
+          :key="r.id"
+          :class="{ 'text-[#55a6fe]': localRegion === r.value }"
+          @click="changeRegion(r.value)"
+        >
+          {{ r.name }}
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { onBeforeMount, ref } from 'vue'
+import { DictCode, HospitalLevelOrRegionItem } from '@/api/home/type.ts'
+import { aptGetHospitalLevelOrRegion } from '@/api/home'
+import { useVModel } from '@vueuse/core'
 
+const props = defineProps({
+  level: { type: String, default: '' },
+  region: { type: String, default: '' }
+})
+
+const emits = defineEmits(['update:level', 'update:region'])
+
+const levels = ref<HospitalLevelOrRegionItem[]>([])
+const regions = ref<HospitalLevelOrRegionItem[]>([])
+const localLevel = useVModel(props, 'level', emits)
+const localRegion = useVModel(props, 'region', emits)
+
+const getLevels = async () => {
+  const { ok, data } = await aptGetHospitalLevelOrRegion(DictCode.HosType)
+  if (ok) {
+    levels.value = data || []
+  }
+}
+
+const getRegions = async () => {
+  const { ok, data } = await aptGetHospitalLevelOrRegion(DictCode.HosBeijing)
+  if (ok) {
+    regions.value = data || []
+  }
+}
+
+const changeLevel = (level: string) => {
+  localLevel.value = level
+  emits('update:level', level)
+}
+
+const changeRegion = (region: string) => {
+  localRegion.value = region
+  emits('update:region', region)
+}
+
+onBeforeMount(() => {
+  getLevels()
+  getRegions()
+})
 </script>
 
 <style lang="scss" scoped>
